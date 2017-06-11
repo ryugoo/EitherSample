@@ -1,0 +1,127 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.jakewharton.hugo'
+
+// Version
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+
+// Package
+def packageName = "com.r384ta.android.eithertest"
+
+android {
+  compileSdkVersion 26
+  buildToolsVersion "26.0.0"
+
+  defaultConfig {
+    applicationId packageName
+    minSdkVersion 16
+    targetSdkVersion 26
+    versionCode versionMajor * 100 + versionMinor * 10 + versionPatch
+    versionName "$versionMajor.$versionMinor.$versionPatch"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    vectorDrawables.useSupportLibrary = true
+  }
+  buildTypes {
+    release {
+      shrinkResources true
+      debuggable false
+      jniDebuggable false
+      minifyEnabled true
+      zipAlignEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+    debug {
+      applicationIdSuffix '.debug'
+      versionNameSuffix '-dev'
+      shrinkResources false
+      debuggable true
+      jniDebuggable true
+      zipAlignEnabled true
+      minifyEnabled false
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  packagingOptions {
+    exclude 'META-INF/NOTICE.txt'
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/DEPENDENCIES'
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/LICENSE'
+    exclude 'META-INF/services/javax.annotation.processing.Processor'
+  }
+  dataBinding {
+    enabled = true
+  }
+}
+
+// Library version
+ext {
+  // Google
+  support_lib_version = '26.0.0-beta2'
+  constraint_layout_version = '1.0.2'
+  databinding_compiler_version = '2.3.3'
+
+  // Square
+  timber_version = '4.5.1'
+
+  // Rx
+  rxjava_version = '2.1.0'
+  rxbinding_version = '2.0.0'
+  rxandroid_version = '2.0.1'
+  rxlifecycle_version = '2.1.0'
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    exclude group: 'com.android.support', module: 'support-annotations'
+    exclude group: 'com.google.code.findbugs', module: 'jsr305'
+  })
+  testCompile 'junit:junit:4.12'
+
+  // Kotlin
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+  // Google
+  implementation "com.android.support:appcompat-v7:$support_lib_version"
+  implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
+  kapt "com.android.databinding:compiler:$databinding_compiler_version"
+
+  // Square
+  implementation "com.jakewharton.timber:timber:$timber_version"
+
+  // Rx
+  implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+  implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+  implementation "com.jakewharton.rxbinding2:rxbinding:$rxbinding_version"
+  implementation "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxbinding_version"
+  implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxbinding_version"
+  implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxbinding_version"
+  implementation "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:$rxbinding_version"
+  implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$rxbinding_version"
+  implementation "com.trello.rxlifecycle2:rxlifecycle:$rxlifecycle_version"
+  implementation "com.trello.rxlifecycle2:rxlifecycle-android:$rxlifecycle_version"
+  implementation "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle_version"
+  implementation "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxlifecycle_version"
+  implementation "com.trello.rxlifecycle2:rxlifecycle-android-lifecycle-kotlin:$rxlifecycle_version"
+}

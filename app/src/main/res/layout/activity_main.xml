@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/main_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.r384ta.android.eithertest.MainActivity">
+
+        <Button
+            android:id="@+id/test_either_j"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/test_either_java"/>
+
+        <Button
+            android:id="@+id/test_either_k"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/test_either_j"
+            android:text="@string/test_either_kotlin"/>
+
+        <Button
+            android:id="@+id/test_rx_binding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/test_either_k"
+            android:text="@string/test_rx_binding"/>
+
+        <Button
+            android:id="@+id/test_rx_binding_either"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/test_rx_binding"
+            android:text="@string/test_rx_binding"/>
+    </RelativeLayout>
+</layout>

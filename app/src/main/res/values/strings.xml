@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">EitherTest</string>
+    <string name="test_either_java">Test Either (Java)</string>
+    <string name="test_either_kotlin">Test Either (Kotlin)</string>
+    <string name="test_rx_binding">Test RxBinding</string>
+    <string name="test_rx_binding_either">Test RxBinding (Either)</string>
+</resources>
